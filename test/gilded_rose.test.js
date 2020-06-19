@@ -25,11 +25,18 @@ describe('Gilded Rose', function () {
   });
 
   describe('Brie', function () {
-    it('should increase quality twice as fast when aging for brie', () => {
+    it('should increase in quality when aging for brie', () => {
       const gildedRose = new Shop([new Item('Aged Brie', 10, 40)]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(41);
       expect(items[0].sellIn).toBe(9);
+    });
+
+    it('should increase double in quality when sellin is less than 0 when aging for brie', () => {
+      const gildedRose = new Shop([new Item('Aged Brie', 0, 40)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(42);
+      expect(items[0].sellIn).toBe(-1);
     });
 
     it('should increase quality to maximum 50', () => {
@@ -51,11 +58,25 @@ describe('Gilded Rose', function () {
   });
 
   describe('Concert', function () {
+    it('should increase quality with 1 when 11 days left until the concert', () => {
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 11, 25)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(26);
+      expect(items[0].sellIn).toBe(10);
+    });
+
     it('should increase quality with 2 when less than 10 days left until the concert', () => {
       const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 10, 25)]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(27);
       expect(items[0].sellIn).toBe(9);
+    });
+
+    it('should increase quality with 2 when 6 days left until the concert', () => {
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 6, 25)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(27);
+      expect(items[0].sellIn).toBe(5);
     });
 
     it('should increase quality with 3 when less than 5 days left until the concert', () => {
@@ -95,7 +116,7 @@ describe('Gilded Rose', function () {
           new Item('Backstage passes to a TAFKAL80ETC concert', 10, 25),
           new Item('Backstage passes to a TAFKAL80ETC concert', 5, 25),
           new Item('Backstage passes to a TAFKAL80ETC concert', 0, 50),
-          new Item('Conjured', 10, 25),
+         new Item('Conjured', 10, 25),
         ],
       );
       const items = gildedRose.updateQuality();

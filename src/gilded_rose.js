@@ -22,6 +22,12 @@ class Shop {
       [Sulfuras]: (item) => item,
       [Brie]: (item) => {
         --item.sellIn;
+        if (item.sellIn < 0) {
+          item.quality = increaseQuality(item.quality, 2);
+          return item;
+          
+        }
+
         item.quality = increaseQuality(item.quality);
         return item;
       },
@@ -38,6 +44,7 @@ class Shop {
             item.quality = increaseQuality(item.quality, 2);
             return item;
           default:
+            item.quality = increaseQuality(item.quality);
             return item;
         }
       },
