@@ -3,6 +3,7 @@ import {
   concertProcessor,
   conjuredProcessor,
   defaultProcessor,
+  sulfurasProcessor,
 } from './QualityProcessors';
 
 const Sulfuras = 'Sulfuras, Hand of Ragnaros';
@@ -13,7 +14,7 @@ const Default = 'Default';
 
 export function getQualityProcessor(name) {
   const productProcessorFactory = {
-    [Sulfuras]: (item) => item,
+    [Sulfuras]: sulfurasProcessor,
     [Brie]: brieProcessor,
     [Concert]: concertProcessor,
     [Conjured]: conjuredProcessor,

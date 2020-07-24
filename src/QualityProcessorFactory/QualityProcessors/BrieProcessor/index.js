@@ -1,3 +1,5 @@
+import { increaseQuality } from '../../../Services';
+
 export function brieProcessor(item) {
   --item.sellIn;
   if (item.sellIn < 0) {

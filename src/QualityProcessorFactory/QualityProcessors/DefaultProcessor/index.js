@@ -1,3 +1,5 @@
+import { decreaseQuality } from '../../../Services/DecreaseQuality';
+
 export function defaultProcessor(item) {
   --item.sellIn;
   item.quality = decreaseQuality(item.quality);
